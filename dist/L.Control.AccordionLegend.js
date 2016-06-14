@@ -51,7 +51,8 @@
 
 L.Control.AccordionLegend = L.Control.extend({
     options: {
-        position: 'topleft'
+        position: 'topleft',
+        title: 'Map Layers'
     },
     initialize: function(options) {
         if (! options.content || ! Array.isArray(options.content) ) throw "L.Control.AccordionLegend: missing content list";
@@ -85,7 +86,7 @@ L.Control.AccordionLegend = L.Control.extend({
         // first, the button
         var button          = L.DomUtil.create('div', 'leaflet-control-accordionlegend-button', maindiv);
         button.control      = this;
-        button.innerHTML    = 'Map Layers';
+        button.innerHTML    = this.options.title;
         L.DomEvent
             .addListener(button, 'mousedown', L.DomEvent.stopPropagation)
             .addListener(button, 'click', L.DomEvent.stopPropagation)
