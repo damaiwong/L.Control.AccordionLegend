@@ -18,9 +18,10 @@
                     {
                         'title': "Stamen Watercolor",
                         'layer': L.tileLayer('http://{s}.tile.stamen.com/watercolor/{z}/{x}/{y}.jpg', { zIndex:1000, opacity:0.6 }),
-                        'type': 'point', // point=circle icons in legend; anything_else=square icons in legend
                         'legend': [
-                            { 'color':'#FF9933', 'text':"Legend Title and Color" },
+                            { 'type':'square', 'color':'#FF9933', 'text':"Square Legend Swatch" },
+                            { 'type':'circle', 'color':'#99FF33', 'text':"Circular Legend Swatch" },
+                            { 'type':'image', 'url':'https://cdn4.iconfinder.com/data/icons/6x16-free-application-icons/16/Boss.png', 'text':"Icon Swatch" },
                         ],
                     },
                     // add more layer objects to this section
@@ -32,9 +33,8 @@
                     {
                         'title': "Stamen Toner",
                         'layer': L.tileLayer('http://{s}.tile.stamen.com/toner/{z}/{x}/{y}.png', { zIndex:1000, opacity:0.6 }),
-                        'type': 'polygon', // point=circle icons in legend; anything_else=square icons in legend
                         'legend': [
-                            { 'color':'#000000', 'text':"Legend Title and Color" },
+                            { 'type':'circle', 'color':'rgb(255,255,0)', 'text':"Yellow Circular Swatch" },
                         ],
                     },
                     // add more layer objects to this section

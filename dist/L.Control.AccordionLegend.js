@@ -1,52 +1,5 @@
 /*
- * Github project: https://github.com/GreenInfo-Network/L.Control.AccordionLegend
- *
- * Usage:
- *      // feed it a set of sections and layer-legend items
- *      // keep a reference to our layerControl cuz we will need it to generate and apply shared states... see getStatefulParams()
- *      var LAYERS_AND_LEGENDS = [
- *          {
- *              'title': "Community Engagement",
- *              layers: [.
- *                  {
- *                      'layer': 'Meeting_Locations',
- *                      'title': "Workshop locations",
- *                      'type': 'point',
- *                      'legend': [
- *                          { 'color':'rgb(235,200,55)', 'text':"Workshop location" },
- *                      ],
- *                  },
- *                  {
- *                      'layer': 'LanguageTranslation_Recommendation',
- *                      'title': "Tool kit languages, recommended",
- *                      'type': 'polygon',
- *                      'legend': [
- *                          { 'color':'rgb(204,204,204)', 'text':"English Only" },
- *                          { 'color':'rgb(115,90,242)', 'text':"Armenian" },
- *                          { 'color':'rgb(230,102,25)', 'text':"Chinese" },
- *                          { 'color':'rgb(84,217,217)', 'text':"Spanish" },
- *                          { 'color':'rgb(230,51,128)', 'text':"Spanish and Korean" },
- *                      ],
- *                  },
- *                  {
- *                      'layer': 'LanguageTranslation_Actual',
- *                      'title': "Tool kit languages, actual",
- *                      'type': 'polygon',
- *                      'legend': [
- *                          { 'color':'rgb(204,204,204)', 'text':"English Only" },
- *                          { 'color':'rgb(230,102,25)', 'text':"Chinese Only" },
- *                          { 'color':'rgb(84,217,217)', 'text':"Spanish Only" },
- *                          { 'color':'rgb(115,89,191)', 'text':"Spanish and Chinese" },
- *                          { 'color':'rgb(230,51,128)', 'text':"Spanish and Korean" },
- *                      ],
- *                  },
- *              ]
- *          },
- *      ];
- *      var layerControl = new L.Control.AccordionLegend({
- *          position: 'topleft',
- *          content: LAYERS_AND_LEGENDS,
- *      }).addTo(this.map).expandUI('Community Engagement').toggleLayer('LanguageTranslation_Actual',true);
+ * https://github.com/GreenInfo-Network/L.Control.AccordionLegend
  */
 
 L.Control.AccordionLegend = L.Control.extend({
@@ -169,14 +122,28 @@ L.Control.AccordionLegend = L.Control.extend({
                 });
 
                 layer.legend.forEach(function (classification) {
-                    var swatchline = L.DomUtil.create('div', '', legend);
+                    var swatchline = L.DomUtil.create('div', 'accordionlegend-classification', legend);
 
-                    var swatch = L.DomUtil.create('div', 'accordionlegend-swatch', swatchline);
-                    swatch.style.backgroundColor = classification.color;
+                    switch (classification.type) {
+                        case 'circle':
+                            var swatch = L.DomUtil.create('div', 'accordionlegend-swatch', swatchline);
+                            swatch.style.backgroundColor = classification.color;
+                            L.DomUtil.addClass(swatch, 'accordionlegend-swatch-circle');
+                            break;
+                        case 'square':
+                            var swatch = L.DomUtil.create('div', 'accordionlegend-swatch', swatchline);
+                            swatch.style.backgroundColor = classification.color;
+                            break;
+                        case 'image':
+                            var swatch = L.DomUtil.create('img', 'accordionlegend-swatch', swatchline);
+                            swatch.src = classification.url;
+                            break;
+                        default:
+                            console.error("L.Control.AccordionLegend unknown legend type: " + classification.type);
+                    }
+
                     var text   = L.DomUtil.create('div', 'accordionlegend-swatch-text', swatchline);
                     text.innerHTML = classification.text;
-
-                    if (layer.type == 'point') L.DomUtil.addClass(swatch, 'accordionlegend-swatch-circle');
                 });
             });
             sections.push(secdiv);
