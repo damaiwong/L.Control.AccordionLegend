@@ -13,11 +13,11 @@
     <script type="text/javascript">
     var LAYERS_AND_LEGENDS = [
             {
-                'title': "Base Maps",
+                'title': "OSM Base Maps",
                 layers: [
                     {
                         'title': "OSM Basemap",
-                        'layer': L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {}),
+                        'layer': L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { zIndex:50, opacity:0.5 }),
                         'legend': [
                             { 'type':'line', 'color':'#e99dae', 'text':"Interstate Highway" },
                             { 'type':'line', 'color':'#f2baa8', 'text':"State Highway" },
@@ -25,9 +25,14 @@
                             { 'type':'square', 'color':'#bdd3d3', 'text':"Water" },
                         ],
                     },
+                ]
+            },
+            {
+                'title': "Stamen Maps",
+                layers: [
                     {
                         'title': "Stamen Watercolor",
-                        'layer': L.tileLayer('http://{s}.tile.stamen.com/watercolor/{z}/{x}/{y}.jpg', { zIndex:1000, opacity:0.5 }),
+                        'layer': L.tileLayer('http://{s}.tile.stamen.com/watercolor/{z}/{x}/{y}.jpg', { zIndex:50, opacity:0.5 }),
                         'legend': [
                             { 'type':'square', 'color':'#e5dbd3', 'text':"Land" },
                             { 'type':'square', 'color':'#90d2d9', 'text':"Water" },
@@ -36,14 +41,30 @@
                     },
                     {
                         'title': "Stamen Toner",
-                        'layer': L.tileLayer('http://{s}.tile.stamen.com/toner/{z}/{x}/{y}.png', { zIndex:1000, opacity:0.5 }),
+                        'layer': L.tileLayer('http://{s}.tile.stamen.com/toner/{z}/{x}/{y}.png', { zIndex:50, opacity:0.5 }),
                         'legend': [
                             { 'type':'square', 'color':'#6f6f6f', 'text':"Water" },
                         ],
                     },
                 ]
             },
-            // add more sections, with a 'section' title and a list of layers:[]
+            {
+                'title': "ESRI Maps",
+                layers: [
+                    {
+                        'title': "World Imagery",
+                        'layer': L.tileLayer('http://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', { zIndex:1, opacity:0.75 }),
+                        'legend': [
+                        ],
+                    },
+                    {
+                        'title': "Boundaries and Labels",
+                        'layer': L.tileLayer('http://services.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}', { zIndex:1000, opacity:1 }),
+                        'legend': [
+                        ],
+                    },
+                ]
+            },
         ];
 
         function init() {
