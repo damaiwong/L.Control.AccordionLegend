@@ -13,48 +13,53 @@
     <script type="text/javascript">
     var LAYERS_AND_LEGENDS = [
             {
-                'title': "Examples 1",
+                'title': "Base Maps",
                 layers: [
                     {
-                        'title': "Stamen Watercolor",
-                        'layer': L.tileLayer('http://{s}.tile.stamen.com/watercolor/{z}/{x}/{y}.jpg', { zIndex:1000, opacity:0.6 }),
+                        'title': "OSM Basemap",
+                        'layer': L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {}),
                         'legend': [
-                            { 'type':'square', 'color':'#FF9933', 'text':"Square Legend Swatch" },
-                            { 'type':'circle', 'color':'#99FF33', 'text':"Circular Legend Swatch" },
-                            { 'type':'image', 'url':'https://cdn4.iconfinder.com/data/icons/6x16-free-application-icons/16/Boss.png', 'text':"Icon Swatch" },
+                            { 'type':'line', 'color':'#e99dae', 'text':"Interstate Highway" },
+                            { 'type':'line', 'color':'#f2baa8', 'text':"State Highway" },
+                            { 'type':'line', 'color':'#e1c6db', 'text':"State Boundary" },
+                            { 'type':'square', 'color':'#bdd3d3', 'text':"Water" },
                         ],
                     },
-                    // add more layer objects to this section
+                    {
+                        'title': "Stamen Watercolor",
+                        'layer': L.tileLayer('http://{s}.tile.stamen.com/watercolor/{z}/{x}/{y}.jpg', { zIndex:1000, opacity:0.5 }),
+                        'legend': [
+                            { 'type':'square', 'color':'#e5dbd3', 'text':"Land" },
+                            { 'type':'square', 'color':'#90d2d9', 'text':"Water" },
+                            { 'type':'line', 'color':'#ddceba', 'text':"Highway" },
+                        ],
+                    },
+                    {
+                        'title': "Stamen Toner",
+                        'layer': L.tileLayer('http://{s}.tile.stamen.com/toner/{z}/{x}/{y}.png', { zIndex:1000, opacity:0.5 }),
+                        'legend': [
+                            { 'type':'square', 'color':'#6f6f6f', 'text':"Water" },
+                        ],
+                    },
                 ]
             },
             {
                 'title': "Examples 2",
                 layers: [
-                    {
-                        'title': "Stamen Toner",
-                        'layer': L.tileLayer('http://{s}.tile.stamen.com/toner/{z}/{x}/{y}.png', { zIndex:1000, opacity:0.6 }),
-                        'legend': [
-                            { 'type':'circle', 'color':'rgb(255,255,0)', 'text':"Yellow Circular Swatch" },
-                        ],
-                    },
                     // add more layer objects to this section
                 ]
             },
             // add more sections, with a 'section' title and a list of layers:[]
         ];
 
-        var map, basemap, layercontrol;
         function init() {
-            basemap = L.tileLayer('http://otile1.mqcdn.com/tiles/1.0.0/osm/{z}/{x}/{y}.png', {});
+            var map = L.map('map').setView([37.00, -120.1465], 6);
 
-            map = L.map('map',{
-            }).addLayer(basemap).setView([37.00, -120.1465],6);
-
-            layercontrol = new L.Control.AccordionLegend({
+            new L.Control.AccordionLegend({
                 position: 'topright',
                 title: 'Legend',
                 content: LAYERS_AND_LEGENDS,
-            }).addTo(map).expandUI('Examples').toggleLayer('Stamen Watercolor',false);
+            }).addTo(map).expandUI('Base Maps').toggleLayer('OSM Basemap', true);
         }
     </script>
 </head>
