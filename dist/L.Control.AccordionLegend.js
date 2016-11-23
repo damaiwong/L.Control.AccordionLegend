@@ -96,7 +96,7 @@ L.Control.AccordionLegend = L.Control.extend({
                 control.checkboxRegistry[layer.title] = cbox; // the checkbox registry for toggleLayer()
 
                 var legend = L.DomUtil.create('div', 'accordionlegend-legend accordionlegend-legend-hidden', layerdiv);
-                control.legendRegistry[layer.layer] = legend;
+                control.legendRegistry[layer.title] = legend;
 
                 var startingOpacity = layer.type == 'point' ? 100 : 66;
                 var slider = L.DomUtil.create('input', 'accordionlegend-slider', legend);
