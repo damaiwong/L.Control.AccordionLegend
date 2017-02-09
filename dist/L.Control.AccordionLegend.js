@@ -212,6 +212,8 @@ L.Control.AccordionLegend = L.Control.extend({
     toggleUI: function () {
         var viz = L.DomUtil.hasClass(this.panel, 'leaflet-control-accordionlegend-panel-hidden');
         viz ? this.expandUI() : this.collapseUI();
+
+        // return myself cuz method chaining is awesome
         return this;
     },
     expandSection: function (sectionname) {
@@ -232,6 +234,9 @@ L.Control.AccordionLegend = L.Control.extend({
                 triangle.innerHTML = '+';
             }
         });
+
+        // return myself cuz method chaining is awesome
+        return this;
     },
     collapseSection: function (sectionname) {
         var control = this;
@@ -246,6 +251,9 @@ L.Control.AccordionLegend = L.Control.extend({
             L.DomUtil.addClass(secdiv, 'accordionlegend-section-hidden');
             triangle.innerHTML = '+';
         });
+
+        // return myself cuz method chaining is awesome
+        return this;
     },
     toggleSection: function (sectionname) {
         var control = this;
@@ -263,6 +271,9 @@ L.Control.AccordionLegend = L.Control.extend({
                 control.collapseSection(sectionname);
             }
         });
+
+        // return myself cuz method chaining is awesome
+        return this;
     },
     collapseUI: function () {
         // add the CSS which hides the legend panel
