@@ -164,7 +164,9 @@ L.Control.AccordionLegend = L.Control.extend({
         handleResize();
 
         // collapse the UI
+        // and trigger a section now so as to update the + and - signs on the sections
         this.collapseUI();
+        this.expandSection(sections[0].title);
 
         // and we're done!
         return maindiv;
